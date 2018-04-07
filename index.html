@@ -16,7 +16,7 @@
         
       <section class="fdb-block">
         <div class="container">
-          <div class="row justify-content-center">
+          <div class="row justify-content-center ">
             <div class="col-12 col-md-8 text-center">
               <h1>💸<br>Churn Calculator </h1>
               <p class="text-h3 quieter">
@@ -31,12 +31,14 @@
         <section class="">
         <div class="container">
           <div class="row justify-content-center">
-        <div class="col-md-8 offset-md-2 form-padding " id="calculator" style="">
+        <div class="col-md-8 offset-md-2" id="calculator" style="">
       <form class="churn-form" method="post" action="/calculators/churn-subscription-calculate/">
         <input type="hidden" name="..." value="...">
         <div class="main-chrun-fields percent-churn">
           <h3 class="churn-form-inline ">
-            I sell a subscription for $<input type="number" name="cost_of_product" value="10" min="1" required="" id="id_cost_of_product"> a month. <br> I have a total <input type="number" name="num_of_customers" value="20" min="1" required="" id="id_num_of_customers"> customers. <br>Every month <input type="number" name="monthly_churn" value="2" min="0" required="" id="id_monthly_churn"> customers churn.  
+            I sell a subscription for $<input type="number" name="subscription_price" value="10" min="1" required="" id="subscription_price"> a month. <br> 
+              I have a total <input type="number" name="num_of_customers" value="20" min="1" required="" id="num_of_customers"> customers. <br>
+              Every month <input type="number" name="monthly_churn" value="2" min="0" required="" id="monthly_churn"> customers churn.  
           </h3>
         </div>
       </form>
