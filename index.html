@@ -237,83 +237,81 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
     crossorigin="anonymous"></script>
   <script>
+    function readInputFromUrl() {
+      var hash = String(window.location.hash);
+      if (!hash || hash.substring(0, 2) !== "#!") {
+        return false
+      }
+      var parts = hash.trim().substring(2, Infinity).split(",");
+      if (parts.length !== 3) {
+        return false;
+      }
+      var vals = {};
+      vals.price = parseInt(parts[0], 10);
+      vals.customers = parseInt(parts[1], 10);
+      vals.lostCustomers = parseInt(parts[2], 10);
+      return vals;
+    }
+    function readInputFromForm() {
+      vals = {};
+      vals.price = parseInt($("#subscription_price").val(), 10);
+      vals.customers = parseInt($("#num_of_customers").val(), 10);
+      vals.lostCustomers = parseInt($("#monthly_churn").val(), 10);
+      return vals;
+    }
+    function updateChurn(formClicked) {
+      var inputs = formClicked ? readInputFromForm() : readInputFromUrl();
+      if (inputs) {
+        showDashboardPage()
+      }
+      var percentChurn = (inputs.lostCustomers / (inputs.customers ? inputs.customers : 1)) * 100;
+      var revenueChurn = inputs.lostCustomers * inputs.price;
+      render(inputs.price, inputs.customers, percentChurn, revenueChurn, inputs.lostCustomers);
+      updateHash(inputs.price, inputs.customers, inputs.lostCustomers);
+    }
+    function render(price, customers, percentChurn, revenueChurn, lostCustomers) {
+      var PERIOD = 12;
+      if (Math.round(percentChurn) >= 100) {
+        $("#churn").html("All of them!");
+      } else {
+        $("#churn").html(Math.round(percentChurn) + "%");
+      }
+      if (Math.round(percentChurn * PERIOD) >= 100) {
+        $("#churn-yr").html("All of them!");
+      } else {
+        $("#churn-yr").html(Math.round(percentChurn * PERIOD) + "%");
+      }
+      $("#revenueChurn").html("€" + Math.round(revenueChurn));
+      $("#lostCustomers").html(Math.round(lostCustomers));
+      $("#revenueChurn-yr").html("€" + Math.round(revenueChurn * PERIOD));
+      $("#lostCustomers-yr").html(Math.round(lostCustomers) * PERIOD);
+
+      // Update form with values from URL
+      $("#subscription_price").val(price);
+      $("#num_of_customers").val(customers);
+      $("#monthly_churn").val(lostCustomers);
+    }
+    function showDashboardPage() {
+      $("#page-dashboard").show();
+      $("#page-form").hide();
+    }
+    function showFormPage() {
+      $("#page-form").show();
+      $("#page-dashboard").hide();
+    }
+    function updateHash(price, customers, churn) {
+      window.location.hash = "#!" + price + "," + customers + "," + churn;
+    }
     $(document).ready(function () {
       $('#calculate-btn').on('click', function () {
-        var inputs = updateChurn();
+        updateChurn(true);
         showDashboardPage();
-        updateHash(inputs.price, inputs.customers, inputs.churn);
       });
       $('#editagain-btn').on('click', function () {
         showFormPage();
       });
       updateChurn();
     });
-
-    function readInputFromUrl() {
-      if (hash && hash.substring(0, 2) == "#!") {
-        console.log("Missing hash");
-        return false
-      }
-      var hash = String(window.location.hash);
-      var parts = hash.trim().substring(2, Infinity).split(",");
-      console.log(parts);
-
-      if (parts.length !== 3) {
-        console.log("Hash is missing parts");
-        return false;
-      }
-      console.log("Loading from hash");
-      var vals = {};
-      vals.price = parseInt(parts[0], 10);
-      vals.customers = parseInt(parts[1], 10);
-      vals.churn = parseInt(parts[2], 10);
-      return vals;
-    }
-
-    function readInputFromForm() {
-      vals = {};
-      vals.price = parseInt($("#subscription_price").val(), 10);
-      vals.customers = parseInt($("#num_of_customers").val(), 10);
-      vals.churn = parseInt($("#monthly_churn").val(), 10);
-      return vals;
-    }
-
-    function updateHash(price, customers, churn) {
-      window.location.hash = "#!" + price + "," + customers + "," + churn;
-    }
-
-    function updateChurn() {
-      console.log("updating churn");
-      // First read from hash then form, if we have a hash we display dashboard directly
-      var inputs = readInputFromUrl();
-      if (!inputs) {
-        inputs = readInputFromForm();
-      } else {
-        showDashboardPage()
-      }
-      var percentChurn = (inputs.churn / (inputs.customers ? inputs.customers : 1)) * 100;
-      var revenueChurn = inputs.churn * inputs.price;
-      render(percentChurn, revenueChurn, inputs.customers);
-      return inputs;
-    }
-    function render(percentChurn, revenueChurn, customers) {
-      $("#churn").html(Math.round(percentChurn) + "%");
-      $("#revenueChurn").html("€" + Math.round(revenueChurn));
-      $("#lostCustomers").html(Math.round(customers));
-      $("#churn-yr").html(Math.round(percentChurn * 12) + "%");
-      $("#revenueChurn-yr").html("€" + Math.round(revenueChurn * 12));
-      $("#lostCustomers-yr").html(Math.round(customers) * 12);
-    }
-    function showDashboardPage() {
-      // console.log("Showing dashboard");
-      $("#page-dashboard").show();
-      $("#page-form").hide();
-    }
-    function showFormPage() {
-      // console.log("Showing form");
-      $("#page-form").show();
-      $("#page-dashboard").hide();
-    }
   </script>
 </body>
 
