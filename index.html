@@ -34,7 +34,7 @@
 
 <body>
 
-  <section class="fdb-block">
+  <section class="fdb-block" style="padding-bottom: 50px;">
     <div class="container">
       <div class="row justify-content-center ">
         <div class="col-12 col-md-8 text-center">
@@ -53,24 +53,24 @@
   <section id="page-form">
     <section class="">
       <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-md-8 offset-md-2" id="calculator" style="">
+        <div class="row">
+          <div class="col-12 col-md-8 offset-md-2 text-center" id="calculator" style="">
             <form class="churn-form" method="post" action="/calculators/churn-subscription-calculate/">
               <input type="hidden" name="..." value="...">
               <div class="main-churn-fields percent-churn">
                 <h3 class="churn-form-inline ">
                   I sell a subscription for $
                   <input type="number" name="subscription_price" value="10" min="1" required="" id="subscription_price"> a month.
-                  <br> I have a total
+                  <br><br> I have a total
                   <input type="number" name="num_of_customers" value="20" min="1" required="" id="num_of_customers"> customers.
-                  <br> Every month
+                  <br><br> Every month
                   <input type="number" name="monthly_churn" value="2" min="0" required="" id="monthly_churn"> customers churn.
                 </h3>
               </div>
             </form>
           </div>
-          <div class="text-center">
-            <button id="calculate-btn" class="btn huge" style="margin-top: 1rem;">Calculate Churn</button>
+          <div class="col-12 col-md-8 offset-md-2 text-center">
+            <button id="calculate-btn" class="btn huge" style="margin-top: 2rem;">Calculate Churn</button>
           </div>
         </div>
       </div>
@@ -78,8 +78,8 @@
 
     <section class="fdb-block">
       <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-12 col-md-8 text-center">
+        <div class="row">
+          <div class="col-12 col-md-8 offset-md-2 text-center">
             <h1>😃😞
               <br>Got feedback?</h1>
             <p class="text-h3 quieter">
@@ -145,7 +145,7 @@
       <div class="container">
         <div class="row text-center ">
           <div class="col-12">
-            <button id="editagain-btn" class="btn btn-empty">Edit data and run numbers again</button>
+            <button id="editagain-btn" class="btn">Edit data and run numbers again</button>
           </div>
         </div>
       </div>
@@ -195,7 +195,7 @@
     <section class="fdb-block" style="padding-top: 0px;">
       <div class="container">
         <div class="row justify-content-center">
-          <div class="col-12 col-md-8 text-center">
+          <div class="col-12 col-md-12 text-center">
             <h1>Share your report</h1>
             <p class="text-h3 quieter"> Who else should know about these numbers? </p>
             <!-- Go to www.addthis.com/dashboard to customize your tools -->

@@ -283,6 +283,16 @@ table tr.no-border th, table tr.no-border td {
     font-size: 1.2rem;
 }
 
+.churn-form .churn-form-inline  {
+    color: #333;
+     font-family: 'Nunito Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizelegibility;
+  font-size: 1.75rem;
+    font-weight: 700;
+}
+
 .churn-form .churn-form-inline input {
     -webkit-transition: .5s ease-in-out;
     -moz-transition: .5s ease-in-out;
@@ -294,14 +304,14 @@ table tr.no-border th, table tr.no-border td {
     width: auto;
     color: #2d7ff9;
     line-height: 1.5;
-    max-width: 125px;
+    max-width: 100px;
         outline: none;
      font-family: 'Nunito Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizelegibility;
   font-size: 1.75rem;
-    margin-bottom: .5em;
+    margin-bottom: .3em;
     margin-top: .3em;
     font-weight: 600;
 }
